@@ -38,6 +38,25 @@ Como o K-Means depende de um K inicial, a escolha dele é fundamental para que h
 
 Etapa 3
 
+O DBSCAN diferente da ideia de procurar centros, o algoritmo identifica quantos vizinhos cada ponto tem. Caso o resultado seja suficiente, define-se uma região densa. Os pontos que se tocam entre regiões densas formam uma ligação e essa cadeia forma um cluster. Esse método não exige a informação da quantidade de clusters.
+O parâmetro Epsilon é o raio que define se dois pontos podem ser considerados vizinhos caso sua distância for menor ou igual ao valor e Epsilon.
+MinPts/MinSamples é o parâmetro que define se uma região é densa ou não com base na quantidade de pontos dentro do raio Epsilon.
+Com base nos dois parâmetros citados acima, os pontos são considerados centrais, com ao menos MinPts vizinhos em Epsilon, de borda, dentro do raio, porém sem vizinhos suficientes, e de ruído, que não tem nenhuma ligação com nenhuma região densa. Os clusters se formam a partir da cadeia de pontos, mantendo os ruídos de fora dos grupos. 
+
+Etapa 4
+
+Diferente do DBSCAN o qual há a necessidade de escolher um único Epsilon, o HDBSCAN considera todos os valores possíveis de Epsilon ao mesmo tempo e os melhores grupos são escolhidos com base em uma hierarquia. O critério que estabelece essa hierarquia é a estabilidade, que mede o quanto cada grupo persiste ao longo dessa faixa de estabilidade. O Min Cluster Size define o menor tamanho aceito para um grupo e o Min Samples controla a estimativa da densidade local e a rigidez do algoritmo. O método facilita trabalhar com grupos de densidades diferentes e mantem sua estabilidade mesmo que parâmetros variem muito. Porém exige muito custo computacional, é mais complexo de interpretar e há a necessidade de normalizar as variáveis.
+
+Etapa 5
+
+Etapa 6
+
+Como os dados da organização não são rotulatos, que o perfil do comportamento é desconhecido e que a densidade das máquinas são distindas, o HDBSCAN seria a abordagem mais adequada para a análise, já que ele não exige a definição prévia do número de grupos nem do raio Epsilon, mantém os ruídos e tem a capacidade de formar simultaneamente grupos densos e esparsos.
+O K-Means precisaria da informação de grupos "suspeitos" "normais" antes para definir as posições de K, porém ele desconsideraria ruídos.
+
+
+
+
 
 
 
